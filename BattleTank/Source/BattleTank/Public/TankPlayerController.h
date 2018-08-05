@@ -21,7 +21,7 @@ public:
 	ATank* GetControlledTank() const;
 
 	/*   OVERRIDE:
-	 What this says is: "Please make Sure their is something else up the Inheritance Tree with with Exactly this signature; 'BeginPlay()',                          I.E. NOT BeginPlay(int When) But PRECISELY 'BeginPlay()' WITH NO PARAMETERS!   override checks to see if it can find it up in the Hierarchy  it wil litterally check the tree until it gets to AActor and it finds BeginPlay()   and the Signature/Syntax for BeginPlay()  is virtual void BeginPlay() "
+	 What this says is: "Please make Sure their is something else UP the Inheritance Tree with with Exactly this signature; 'BeginPlay()',                          I.E. NOT BeginPlay(int When) But PRECISELY 'BeginPlay()' WITH NO PARAMETERS!   override checks to see if it can find it up in the Hierarchy  it wil litterally check the tree until it gets to AActor and it finds BeginPlay()   and the Signature/Syntax for BeginPlay()  is virtual void BeginPlay() "
 	
 	    VIRTUAL VOID:
 	

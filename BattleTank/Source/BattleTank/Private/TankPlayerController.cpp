@@ -17,11 +17,9 @@ void ATankPlayerController::BeginPlay()
 	
 	auto ControlledTank = GetControlledTank();
 
-if (!ControlledTank) { UE_LOG(LogTemp, Warning, TEXT(" %s Has NO Control Over The Tank. "), *GetPawn()->GetName()); }
-else { UE_LOG(LogTemp, Warning, TEXT(" %s Has Control Over The Tank. "), *GetControlledTank()->GetName()); }
+if (!ControlledTank) { UE_LOG(LogTemp, Warning, TEXT(" PlayerController Not Possessing Tank: %s "), *GetPawn()->GetName()); }
+else { UE_LOG(LogTemp, Warning, TEXT(" PlayerController Is Possessing The Tank: %s "), *GetControlledTank()->GetName()); }
 
-
-	UE_LOG(LogTemp, Warning, TEXT(" PlayerController Begin Play "));
 };
 	
 ATank* ATankPlayerController::GetControlledTank() const
