@@ -21,6 +21,14 @@ if (!ControlledTank) { UE_LOG(LogTemp, Warning, TEXT(" PlayerController Not Poss
 else { UE_LOG(LogTemp, Warning, TEXT(" PlayerController Is Possessing The Tank: %s "), *GetControlledTank()->GetName()); }
 
 };
+
+//TICK
+void ATankPlayerController::Tick(float DeltaTime)
+{	//super
+	Super::Tick(DeltaTime);
+	AimTowardsCrosshair();
+}
+
 	
 ATank* ATankPlayerController::GetControlledTank() const
 	{
@@ -28,4 +36,11 @@ ATank* ATankPlayerController::GetControlledTank() const
 	}
 
 
+void ATankPlayerController::AimTowardsCrosshair()
+{
+	if (!GetControlledTank()) { return; } // If their is NO controlled Tank, we need to GTFO.
 
+	// Get world location if linetrace through crosshair
+	//if it hits the landscape,
+		//we want the controlled tank to aim to this point.
+}

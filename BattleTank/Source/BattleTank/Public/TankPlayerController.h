@@ -28,5 +28,11 @@ public:
 	 When BeginPlay() was first declared up at 'AActor' they use the KEYWORD:  "virtual". and this means: my CHILDREN are ALLOWED to OVERRIDE or EXTEND FUNCTIONAILITY of this METHOD. thats what "virtual does".
 	*/
 	virtual void BeginPlay() override;
-	
+
+	virtual void Tick(float DeltaTime) override; 
+//virtual says: If we make a child of this PlayerControllerClass then its children can override and extend the behavior of the Tick method.
+//override says: it makes the compiler check to make sure their is a signature pf (Tick(float DeltaTime)) somewhere up the hierarchy tree.	
+private:
+	// Start The tank moving the Barrell So it can Aim and shoot where the crosshair intersects the world
+	void AimTowardsCrosshair();
 };
