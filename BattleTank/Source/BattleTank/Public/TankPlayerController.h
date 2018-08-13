@@ -12,12 +12,17 @@
 /**
  * 
  */
+
+
 UCLASS()
 class BATTLETANK_API ATankPlayerController : public APlayerController
 {
 	GENERATED_BODY()
 
 public:
+
+
+private:
 	ATank* GetControlledTank() const;
 
 	/*   OVERRIDE:
@@ -26,15 +31,28 @@ public:
 	    VIRTUAL VOID:
 	
 	 When BeginPlay() was first declared up at 'AActor' they use the KEYWORD:  "virtual". and this means: my CHILDREN are ALLOWED to OVERRIDE or EXTEND FUNCTIONAILITY of this METHOD. thats what "virtual does".
+
+	  'virtual' says: If we make a child of this PlayerControllerClass then its children can override and extend the behavior of the Tick method.
+	 'override' says: it makes the compiler check to make sure their is a signature pf (Tick(float DeltaTime)) somewhere up the hierarchy tree.
 	*/
 	virtual void BeginPlay() override;
-
+	
 	virtual void Tick(float DeltaTime) override; 
-//virtual says: If we make a child of this PlayerControllerClass then its children can override and extend the behavior of the Tick method.
-//override says: it makes the compiler check to make sure their is a signature pf (Tick(float DeltaTime)) somewhere up the hierarchy tree.	
-private:
+
+
 	// Start The tank moving the Barrell So it can Aim and shoot where the crosshair intersects the world
 	void AimTowardsCrosshair();
-	bool GetSightRayHitLocation(FVector& OutHitLocation) const;
+
+	bool GetSightRayHitLocation(FVector &OutHitLocation) const;
+	
+
+	UPROPERTY(EditAnywhere)
+	float CrossHairXLocation = 0.5;
+
+	UPROPERTY(EditAnywhere)
+	float CrossHairYLocation = 0.3333;
+
+	
+
 
 };
