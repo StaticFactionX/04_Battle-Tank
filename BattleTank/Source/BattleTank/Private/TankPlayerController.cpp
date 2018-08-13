@@ -55,39 +55,63 @@ void ATankPlayerController::AimTowardsCrosshair()
 		//we want the controlled tank to aim to this point.
 }
 
+
+
 /// Get world location if linetrace through crosshair, true if it hits the landscape                                                                          Make sure to access Class. [and pass a reference to FVector&, the reference is OutHitLocation].
 bool ATankPlayerController::GetSightRayHitLocation(FVector &OutHitLocation) const 
 {
-/*		**************************************************************************************************************************       
-													///   ~~~~~~PSUEDO CODE~~~~~~    \\\\ 
-	     *************************************************************************************************************************		*/
+	/// STEP 1    Find CrossHair Position  ( We Found The CrossHair postiion In Pixels. )
+		int32 ViewportSizeX;
+		int32 ViewportSizeY;
 
-/// Find CrossHair Position  ( We Found The CrossHair postiion In Pixels. )
-	int32 ViewportSizeX, ViewportSizeY;
-///QUESTION:  Do the Passed variables get DEFINED once passed, Does GetViewPortSize DEFINE them for me automatically? //
-	GetViewportSize(ViewportSizeX, ViewportSizeY); 
+		
+	///QUESTION:  Do the Passed variables get DEFINED once passed, Does GetViewPortSize DEFINE them for me automatically? //
+		GetViewportSize(ViewportSizeX, ViewportSizeY); //GetViewPortSize() Built-in Helper Method.
 
-	
-///EXAMPLE: IF (('ViewportSizeX' = 1000 PX) * (CrossHairXLocation = 0.5)) then the ScreenLocation for X = 500 PX Across, Do The Same Calulation For 'Y'.
-	auto ScreenLocation = FVector2D(ViewportSizeX * CrossHairXLocation, ViewportSizeY * CrossHairYLocation);
-/// UE_LOG(LogTemp, Warning, TEXT(" ScreenLocation: %s"), *ScreenLocation.ToString()); In Case we wanna Make Sure ScreenLocation is working.
-	
+		auto ScreenLocation = FVector2D(ViewportSizeX * CrossHairXLocation, ViewportSizeY * CrossHairYLocation);
+	/*
+	EXAMPLE: IF (('ViewportSizeX' = 1000 PX) * (CrossHairXLocation = 0.5)) then the ScreenLocation for X = 500 PX Across, Do The Same Calulation For 'Y'
 
-///"De-Project" The Screen-Position of the CrossHair to a WorldDirection.
-	FVector WorldDirection, CameraWorldLocation;
+	UE_LOG(LogTemp, Warning, TEXT(" ScreenLocation: %s"), *ScreenLocation.ToString()); In Case we wanna Make Sure ScreenLocation is working.
+
+	STEP 2:  "De-Project" The Screen-Position of the CrossHair to a WorldDirection.
+	*/
 	
-	if (DeprojectScreenPositionToWorld(ScreenLocation.X, ScreenLocation.Y, CameraWorldLocation, WorldDirection))
-	{
-		UE_LOG(LogTemp, Warning, TEXT(" Look Direction Is: %s"), *WorldDirection.ToString());
-	}
-///Line-Trace along through that direction, and see what we hit with some maximum Range.
+		FVector LookDirection;
+		
+		if (GetLookDirection(ScreenLocation, LookDirection))
+		{
+			UE_LOG(LogTemp, Warning, TEXT(" Look Direction is: %s "), *LookDirection.ToString())
+		}
+
+	/// STEP 3   Line-Trace along through that direction, and see what we hit with some maximum Range.
 	return true;
 }
 
 
+
+bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector &LookDirection) const /// ! Remember to Add PARAMETERS To DECLARATION. !
+{
+		FVector CameraWorldLocation; // (TO Be DISCARDED) <---> ("LookDirection" Comes in as a REFERENCE or OUT-PARAM)
+
+		return DeprojectScreenPositionToWorld
+		(
+			ScreenLocation.X,
+			ScreenLocation.Y,
+			CameraWorldLocation,
+			LookDirection
+		);		
+}
+
+
+
+
+
 /*
+QUESTION:
 8/13/18
 IF A FUNCTION 1, CALLS FUNCTION 2 
 [I.E.  Function2(){} ] 
 AND FUNCTION 1 HAS A VARIABLE OF 'A' CAN FUNCTION 2 HAVE  '&A'  PASSED IN,   OR NOT BECAUSE IT'S TECHNICALLY "OUT OF SCOPE"? Test LATER IN V.S. 
+
 */
