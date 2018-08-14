@@ -6,6 +6,7 @@
 #include "Runtime/Engine/Classes/GameFramework/Controller.h"
 #include "Runtime/Engine/Classes/GameFramework/Actor.h"
 #include "CoreMinimal.h"
+#include "Runtime/Engine/Classes/Engine/World.h"
 #include "GameFramework/PlayerController.h"
 #include "TankPlayerController.generated.h" // MUST be the LAST to be INCLUDED
 
@@ -54,7 +55,8 @@ private:
 
 	bool GetLookDirection(FVector2D ScreenLocation, FVector &LookDirection) const;
 
-	
+	bool GetLookVectorHitLocation(FVector LookDirection, FVector &OutHitLocation) const;
 
-
+	UPROPERTY(EditAnywhere)
+	float LineTraceRange = 1000000.0; // In Centimeters
 };

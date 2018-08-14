@@ -46,7 +46,7 @@ void ATankPlayerController::AimTowardsCrosshair()
 
 		if (GetSightRayHitLocation(OutHitLocation)) // Has a "Side-Effect, is going to Ray-Trace."
 	{
-		//UE_LOG(LogTemp, Warning, TEXT("Look Direction: %s: "), *OutHitLocation.ToString());
+		UE_LOG(LogTemp, Warning, TEXT(" Hit Location: %s: "), *OutHitLocation.ToString());
 		
 	}
 	
@@ -77,14 +77,15 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector &OutHitLocation) cons
 	STEP 2:  "De-Project" The Screen-Position of the CrossHair to a WorldDirection.
 	*/
 	
+
 		FVector LookDirection;
-		
 		if (GetLookDirection(ScreenLocation, LookDirection))
 		{
-			UE_LOG(LogTemp, Warning, TEXT(" Look Direction is: %s "), *LookDirection.ToString())
+			/// STEP 3   Line-Trace along through that direction, and see what we hit with some maximum Range.
+			GetLookVectorHitLocation(LookDirection, OutHitLocation);
 		}
 
-	/// STEP 3   Line-Trace along through that direction, and see what we hit with some maximum Range.
+	
 	return true;
 }
 
@@ -96,22 +97,44 @@ bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector &
 
 		return DeprojectScreenPositionToWorld
 		(
-			ScreenLocation.X,
-			ScreenLocation.Y,
-			CameraWorldLocation,
-			LookDirection
-		);		
+			ScreenLocation.X,    // float
+			ScreenLocation.Y,    // float
+			CameraWorldLocation, // FVector &
+			LookDirection       // FVector &
+		);	
+		
 }
 
 
+bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVector &OutHitLocation) const
+{
+	FHitResult HitResult;
+	auto StartLocation = PlayerCameraManager->GetCameraLocation();
+	auto  EndLocation = StartLocation + (LookDirection *  LineTraceRange);
 
+	if (GetWorld()->LineTraceSingleByChannel
+	(
+		HitResult,
+		StartLocation,
+		EndLocation,
+		ECollisionChannel::ECC_Visibility)
+		)
+	{
+		OutHitLocation = HitResult.Location;
+		return true;
 
+	}
+	OutHitLocation = FVector(0);
+	return false;
+}
+		
 
 /*
-QUESTION:
+QUESTION 1:
 8/13/18
 IF A FUNCTION 1, CALLS FUNCTION 2 
 [I.E.  Function2(){} ] 
 AND FUNCTION 1 HAS A VARIABLE OF 'A' CAN FUNCTION 2 HAVE  '&A'  PASSED IN,   OR NOT BECAUSE IT'S TECHNICALLY "OUT OF SCOPE"? Test LATER IN V.S. 
 
+QUESTION 2: Is an Out Parameter just another word for a variable being passed into a function, as in it comes from the OUTSIDE of the function?
 */
