@@ -22,6 +22,35 @@ void ATankAIController::BeginPlay()
 	}
 };
 
+
+
+void ATankAIController::Tick(float DeltaTime)
+{
+
+	Super::Tick(DeltaTime);
+
+
+	FVector OutHitLocation;
+
+	if (GetPlayerTank())
+	{
+		//TODO Move towards PLayer
+
+		//AimAt Player.
+		// Get The Tank the A.I. is posessing, make it AimAt Player/User.
+		GetControlledTank()->AimAt(GetPlayerTank()->GetActorLocation());
+		
+
+		// Fire When Ready
+	}
+
+
+
+
+}
+
+
+
 ATank* ATankAIController::GetControlledTank() const
 {
 	
@@ -35,3 +64,5 @@ ATank* ATankAIController::GetPlayerTank() const // does this method EXPECT A POI
 	if (!PlayerPawn) { return nullptr; }
 	return Cast<ATank>(PlayerPawn);  // Returns a cast to a TYPE <ATank>, and we cast it onto PlayerPawn
 }
+
+

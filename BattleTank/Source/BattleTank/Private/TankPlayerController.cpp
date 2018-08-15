@@ -34,7 +34,7 @@ void ATankPlayerController::Tick(float DeltaTime)
 	
 ATank* ATankPlayerController::GetControlledTank() const
 	{
-		return Cast<ATank>(GetPawn());
+		return Cast<ATank>(GetPawn()); // CAST TEMPLATE FUNCTIONS-------- DO RESEARCH!
 	}
 
 
@@ -46,7 +46,7 @@ void ATankPlayerController::AimTowardsCrosshair()
 
 		if (GetSightRayHitLocation(OutHitLocation)) // Has a "Side-Effect, is going to Ray-Trace."
 	{
-		UE_LOG(LogTemp, Warning, TEXT(" Hit Location: %s: "), *OutHitLocation.ToString());
+			GetControlledTank()->AimAt(OutHitLocation);
 		
 	}
 	
@@ -58,13 +58,11 @@ void ATankPlayerController::AimTowardsCrosshair()
 
 
 /// Get world location if linetrace through crosshair, true if it hits the landscape                                                                          Make sure to access Class. [and pass a reference to FVector&, the reference is OutHitLocation].
-bool ATankPlayerController::GetSightRayHitLocation(FVector &OutHitLocation) const 
+bool ATankPlayerController::GetSightRayHitLocation(FVector &OutHitLocation) const   
 {
 	/// STEP 1    Find CrossHair Position  ( We Found The CrossHair postiion In Pixels. )
 		int32 ViewportSizeX;
-		int32 ViewportSizeY;
-
-		
+		int32 ViewportSizeY;	
 	///QUESTION:  Do the Passed variables get DEFINED once passed, Does GetViewPortSize DEFINE them for me automatically? //
 		GetViewportSize(ViewportSizeX, ViewportSizeY); //GetViewPortSize() Built-in Helper Method.
 
@@ -84,8 +82,6 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector &OutHitLocation) cons
 			/// STEP 3   Line-Trace along through that direction, and see what we hit with some maximum Range.
 			GetLookVectorHitLocation(LookDirection, OutHitLocation);
 		}
-
-	
 	return true;
 }
 
@@ -93,7 +89,7 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector &OutHitLocation) cons
 
 bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector &LookDirection) const /// ! Remember to Add PARAMETERS To DECLARATION. !
 {
-		FVector CameraWorldLocation; // (TO Be DISCARDED) <---> ("LookDirection" Comes in as a REFERENCE or OUT-PARAM)
+		FVector CameraWorldLocation; // (TO Be DISCARDED  < - - - -  >  "LookDirection" Comes in as a REFERENCE or OUT-PARAM)
 
 		return DeprojectScreenPositionToWorld
 		(
@@ -106,7 +102,7 @@ bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector &
 }
 
 
-bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVector &OutHitLocation) const
+bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVector &OutHitLocation) const 
 {
 	FHitResult HitResult;
 	auto StartLocation = PlayerCameraManager->GetCameraLocation();

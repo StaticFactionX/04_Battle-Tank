@@ -44,6 +44,7 @@ private:
 	// Start The tank moving the Barrell So it can Aim and shoot where the crosshair intersects the world
 	void AimTowardsCrosshair();
 
+
 	bool GetSightRayHitLocation(FVector &OutHitLocation) const;
 	
 
@@ -52,6 +53,8 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	float CrossHairYLocation = 0.3333;
+
+
 
 	bool GetLookDirection(FVector2D ScreenLocation, FVector &LookDirection) const;
 

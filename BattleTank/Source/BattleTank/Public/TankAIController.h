@@ -17,16 +17,20 @@ class BATTLETANK_API ATankAIController : public AAIController
 {
 	GENERATED_BODY()
 
-public:
 
-	virtual void BeginPlay() override;
+
 
 
 private: 
-	
-	
+
+
+	virtual void BeginPlay() override;
+
+	virtual void Tick(float DeltaTime) override;
+
 	ATank* GetControlledTank() const;
 	
 	ATank* GetPlayerTank() const;  // does this return a POINTER to the Player Tank?
+	
 	
 };
