@@ -62,4 +62,15 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	float LineTraceRange = 1000000.0; // In Centimeters
+
+
+
+	/* Question to ask:  if I DO:    AActor*  MyActor   im saying MyActor is Of TYPE Actor, because this is a pointer to an Object/Class does the pointer automatically assign the data at AActor* to MyActor, to make it function? 
+	
+	ALSO, SIDE NOTE:  An lvalue refers to an object that persists beyond a single expression. You can think of an lvalue as an object that has a name. All variables, including nonmodifiable ( const ) variables, are lvalues. An rvalue is a temporary value that does not persist beyond the expression that uses it.
+	*/
 };
+
+
+
+

@@ -38,6 +38,9 @@ void ATankAIController::Tick(float DeltaTime)
 
 		//AimAt Player.
 		// Get The Tank the A.I. is posessing, make it AimAt Player/User.
+
+		//AI_TankLocation = GetControlledTank()->GetPawn();
+
 		GetControlledTank()->AimAt(GetPlayerTank()->GetActorLocation());
 		
 
@@ -58,11 +61,12 @@ ATank* ATankAIController::GetControlledTank() const
 }
 
 
+
+
 ATank* ATankAIController::GetPlayerTank() const // does this method EXPECT A POINTER coming back to ATank* ?
 {
 	auto PlayerPawn = GetWorld()->GetFirstPlayerController()->GetPawn();
 	if (!PlayerPawn) { return nullptr; }
 	return Cast<ATank>(PlayerPawn);  // Returns a cast to a TYPE <ATank>, and we cast it onto PlayerPawn
 }
-
 

@@ -18,7 +18,10 @@ class BATTLETANK_API ATankAIController : public AAIController
 	GENERATED_BODY()
 
 
+public:
 
+
+protected:
 
 
 private: 
@@ -30,7 +33,8 @@ private:
 
 	ATank* GetControlledTank() const;
 	
-	ATank* GetPlayerTank() const;  // does this return a POINTER to the Player Tank?
+	ATank* GetPlayerTank() const;  // does this return a POINTER to the Player Tank? If so what does that DO for us?
 	
+
 	
 };
