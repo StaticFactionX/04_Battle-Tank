@@ -14,6 +14,14 @@ UTankAimingComponent::UTankAimingComponent()
 }
 
 
+void UTankAimingComponent::SetBarrellReference(UStaticMeshComponent* BarrelToSet)
+{
+	Barrel = BarrelToSet; // We have delegated the BarrelToSet to the "UTankAimingComponent"
+}
+
+
+
+
 // Called when the game starts
 void UTankAimingComponent::BeginPlay()
 {
@@ -35,5 +43,8 @@ void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, F
 void UTankAimingComponent::AimAt(FVector OutHitLocation)
 {
 	auto OurTankName = GetOwner()->GetName();
-	UE_LOG(LogTemp, Warning, TEXT(" %s Is Aiming At: %s: "), *OurTankName, *OutHitLocation.ToString()); // You Only use a  '*'  if you're trying to get an FString out of the Variable, in this case the FString is our name.
+	auto BarrelLocation = Barrel->GetComponentLocation().ToString();
+	UE_LOG(LogTemp, Warning, TEXT(" %s   IS AIMING AT   %s   FROM   %s: "), *OurTankName, *OutHitLocation.ToString(), *BarrelLocation); 
+	// You Only use a  '*'  if you're trying to get an FString out of the Variable, in this case the FString is our name.
 }
+

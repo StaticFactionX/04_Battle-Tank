@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "TankAimingComponent.h"
+#include "Runtime/Engine/Classes/Engine/StaticMesh.h"
 #include "GameFramework/Pawn.h"
 #include "Tank.generated.h"
 
@@ -17,11 +18,20 @@ public:
 	void AimAt(FVector OutHitLocation);
 
 
+
+	UFUNCTION(BlueprintCallable, Category = Setup) // This Creates a reference that BluePrint can call, called 'SetBarrelReference'
+	void SetBarrelReference(UStaticMeshComponent* BarrelToSet); // Declaration
+
+
+
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	UTankAimingComponent* TankAimingComponent = nullptr;
+	UTankAimingComponent* TankAimingComponent = nullptr; 
+	// Lecture 137 OR 138  if a refresher is needed,  
+	//I Believe this is an instantiation of my class UTankAimingComponent and im giving it the Variable TankAimingComponent, RESEARCH
 
 
 
@@ -34,5 +44,7 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	ATank();
+
+
 	
 };
