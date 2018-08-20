@@ -8,6 +8,9 @@
 #include "GameFramework/Pawn.h"
 #include "Tank.generated.h"
 
+
+class UTankBarrel;
+
 UCLASS()
 class BATTLETANK_API ATank : public APawn
 {
@@ -23,7 +26,7 @@ public:
 
 
 	UFUNCTION(BlueprintCallable, Category = Setup) // This Creates a reference that BluePrint can call, called 'SetBarrelReference'
-	void SetBarrelReference(UStaticMeshComponent* BarrelToSet); // Declaration
+	void SetBarrelReference(UTankBarrel* BarrelToSet); // Declaration
 
 
 protected:

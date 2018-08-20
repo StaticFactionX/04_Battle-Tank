@@ -8,7 +8,10 @@
 #include "Components/ActorComponent.h"
 #include "TankAimingComponent.generated.h"
 
+// Forward Delcaration, Allows us to use UTankBarrel Class
+class UTankBarrel;
 
+// Holds Barrels Poperties. and Elevate Method.
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class BATTLETANK_API UTankAimingComponent : public UActorComponent
 {
@@ -22,16 +25,15 @@ public:
 
 	void AimAt(FVector OutHitLocation, float LaunchSpeed);
 
-	void SetBarrellReference(UStaticMeshComponent* BarrelToSet);
+	void SetBarrelReference(UTankBarrel* BarrelToSet);
 
-	void MoveBarrel();
 
 protected:
 	
 
 private:
 	
-	UStaticMeshComponent* Barrel = nullptr;
+	UTankBarrel* Barrel = nullptr;
 
 	void MoveBarrelTowards(FVector AimDirection);
 	
