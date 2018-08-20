@@ -14,6 +14,9 @@ class BATTLETANK_API ATank : public APawn
 	GENERATED_BODY()
 
 public:
+
+	
+
 	// Sets default values for this pawn's properties
 	void AimAt(FVector OutHitLocation);
 
@@ -21,8 +24,6 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = Setup) // This Creates a reference that BluePrint can call, called 'SetBarrelReference'
 	void SetBarrelReference(UStaticMeshComponent* BarrelToSet); // Declaration
-
-
 
 
 protected:
@@ -36,15 +37,22 @@ protected:
 
 
 
-public:	
+private:
+	
+	ATank(); // Constructor
+
+
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	ATank();
+	
 
+
+	UPROPERTY(EditAnywhere, Category = Firing)
+		float LaunchSpeed = 100000;
 
 	
 };

@@ -12,12 +12,12 @@ void ATankAIController::BeginPlay()
 	{
 		if (!PlayerTank)
 		{ 
-			UE_LOG(LogTemp, Warning, TEXT(" AIController Can't find Player Tank "));
+			UE_LOG(LogTemp, Warning, TEXT(" AI_Controller Can't find the Player Tank "));
 		}
 		else 
 		{ 
 
-			UE_LOG(LogTemp, Warning, TEXT(" AIController Found Player: %s "), *PlayerTank->GetName()); 
+			UE_LOG(LogTemp, Warning, TEXT(" AI_Controller Found the Player: %s "), *PlayerTank->GetName()); 
 		}
 	}
 };
@@ -39,9 +39,10 @@ void ATankAIController::Tick(float DeltaTime)
 		//AimAt Player.
 		// Get The Tank the A.I. is posessing, make it AimAt Player/User.
 
-		//AI_TankLocation = GetControlledTank()->GetPawn();
+		
 
-		GetControlledTank()->AimAt(GetPlayerTank()->GetActorLocation());
+		//GetControlledTank()->AimAt(GetPlayerTank()->GetActorLocation());
+		//UE_LOG(LogTemp, Warning, TEXT(" Aiming At Player "));
 		
 
 		// Fire When Ready
