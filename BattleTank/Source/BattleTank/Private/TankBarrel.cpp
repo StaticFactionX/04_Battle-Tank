@@ -10,7 +10,6 @@ void UTankBarrel::ElevateBarrel(float RelativeSpeed)
 
 ///Given a Max Elevation Speed and the Frame Time.
 //	*returns OutHitLocation but with the added benefit of moving the Barrel.
-
-	UE_LOG(LogTemp, Warning, TEXT(" BarrelElevatee() Called at speed %f "), RelativeSpeed);
+	
 }
 

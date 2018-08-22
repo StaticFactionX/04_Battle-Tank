@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Runtime/Engine/Classes/GameFramework/Actor.h"
 #include "Components/StaticMeshComponent.h"
 #include "TankBarrel.generated.h"
 
