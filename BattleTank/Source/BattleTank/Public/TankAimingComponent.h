@@ -8,8 +8,12 @@
 #include "Components/ActorComponent.h"
 #include "TankAimingComponent.generated.h"
 
+
+
 // Forward Delcaration, Allows us to use UTankBarrel Class
 class UTankBarrel;
+
+
 
 // Holds Barrels Poperties. and Elevate Method.
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )

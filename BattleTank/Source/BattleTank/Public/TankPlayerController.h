@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "Tank.h"
+
 #include "Runtime/Engine/Classes/GameFramework/Controller.h"
 #include "Runtime/Engine/Classes/GameFramework/Actor.h"
 #include "CoreMinimal.h"
@@ -13,6 +13,11 @@
 /**
  * 
  */
+
+
+// Forward Declaration
+class ATank;
+
 
 
 UCLASS()

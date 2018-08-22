@@ -42,9 +42,12 @@ void UTankAimingComponent::AimAt(FVector OutHitLocation, float LaunchSpeed)
 		StartLocation,
 		OutHitLocation,
 		LaunchSpeed,
+		false,
+		0,
+		0,
 		ESuggestProjVelocityTraceOption::DoNotTrace
-
-	); 
+		); 
+	
 	// Calculate The OutLaunchVelocity, then:
 		if (bHaveAimSolution)
 		{
@@ -78,6 +81,6 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 
 	
 
-	Barrel->ElevateBarrel(5); //TODO remove Magic Number.
-
+	Barrel->ElevateBarrel(DeltaRotator.Pitch); 
+	// SIDE NOTE: The Number in the () is the Relative Speeds Input that gets passed to Relative Speed the Variable and that's how the calculations work.
 }
