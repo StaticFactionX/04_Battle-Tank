@@ -1,7 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "TankAimingComponent.h"
 #include "TankBarrel.h"
+#include "TankTurret.h"
+#include "TankAimingComponent.h"
+
 
 
 // Sets default values for this component's properties
@@ -17,8 +19,18 @@ UTankAimingComponent::UTankAimingComponent()
 
 void UTankAimingComponent::SetBarrelReference(UTankBarrel* BarrelToSet)
 {
+	if (!BarrelToSet) {	return; }
+
 	Barrel = BarrelToSet; // We have delegated the BarrelToSet to the "UTankAimingComponent"
 }
+
+void UTankAimingComponent::SetTurretReference(UTankTurret* TurretToSet)
+{
+	if (!TurretToSet) {	return; }
+
+	Turret = TurretToSet;
+}
+
 
 
 void UTankAimingComponent::AimAt(FVector OutHitLocation, float LaunchSpeed)
@@ -53,6 +65,7 @@ void UTankAimingComponent::AimAt(FVector OutHitLocation, float LaunchSpeed)
 		{
 		auto AimDirection = OutLaunchVelocity.GetSafeNormal(); // GetSafeNormal() turns it into a Unit Vector.
 		MoveBarrelTowards(AimDirection);
+
 		auto Time = GetWorld()->GetTimeSeconds();
 		UE_LOG(LogTemp, Warning, TEXT(" %f: AimSolution Found. "), Time);
 
@@ -84,3 +97,5 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 	Barrel->ElevateBarrel(DeltaRotator.Pitch); 
 	// SIDE NOTE: The Number in the () is the Relative Speeds Input that gets passed to Relative Speed the Variable and that's how the calculations work.
 }
+
+

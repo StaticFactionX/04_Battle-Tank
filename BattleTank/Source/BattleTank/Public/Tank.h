@@ -31,6 +31,8 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Setup) // This Creates a reference that BluePrint can call, called 'SetBarrelReference'
 	void SetBarrelReference(UTankBarrel* BarrelToSet); // Declaration
 
+	UFUNCTION(BlueprintCallable, Category = Setup)
+		void SetTurretReference(UTankTurret* TurretToSet);
 
 protected:
 	// Called when the game starts or when spawned

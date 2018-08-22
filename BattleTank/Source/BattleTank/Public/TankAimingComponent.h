@@ -12,6 +12,7 @@
 
 // Forward Delcaration, Allows us to use UTankBarrel Class
 class UTankBarrel;
+class UTankTurret;
 
 
 
@@ -29,7 +30,13 @@ public:
 
 	void AimAt(FVector OutHitLocation, float LaunchSpeed);
 
+
+
 	void SetBarrelReference(UTankBarrel* BarrelToSet);
+
+	void SetTurretReference(UTankTurret* TurretToSet);
+
+	
 
 
 protected:
@@ -38,6 +45,8 @@ protected:
 private:
 	
 	UTankBarrel* Barrel = nullptr;
+
+	UTankTurret* Turret = nullptr;
 
 	void MoveBarrelTowards(FVector AimDirection);
 	
