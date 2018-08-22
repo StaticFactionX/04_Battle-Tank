@@ -7,7 +7,7 @@
 ATank::ATank()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 
 	//No Need to protect Pointers as added at construction, 
 	TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("AimingComponent"));
@@ -19,13 +19,6 @@ void ATank::BeginPlay()
 {
 	Super::BeginPlay(); // (This is boiler plate code) THIS calls the default behavior before we do ANYTHING ELSE
 	
-}
-
-// Called every frame
-void ATank::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
 }
 
 // Called to bind functionality to input
