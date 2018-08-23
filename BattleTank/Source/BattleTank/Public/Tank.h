@@ -12,6 +12,7 @@
 class UTankBarrel;
 class UTankAimingComponent;
 class UTankTurret;
+class AProjectile;
 
 
 
@@ -35,6 +36,8 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void Fire();
+
+
 
 
 
@@ -65,5 +68,10 @@ private:
 	UPROPERTY(EditAnywhere, Category = Firing)
 		float LaunchSpeed = 60000;
 
+	UPROPERTY(EditAnywhere, Category = Setup)
+		TSubclassOf<AProjectile> ProjectileBlueprint;
+
+	// Local Barrel Reference for spawning projectile.
+	UTankBarrel* Barrel = nullptr;
 	
 };
