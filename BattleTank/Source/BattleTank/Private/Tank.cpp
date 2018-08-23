@@ -18,6 +18,8 @@ ATank::ATank()
 	//No Need to protect Pointers as added at construction, 
 	TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("AimingComponent"));
 
+	
+
 }
 
 
@@ -25,20 +27,20 @@ ATank::ATank()
 
 void ATank::Fire()
 {
-	auto Time = GetWorld()->GetTimeSeconds();
-	UE_LOG(LogTemp, Warning, TEXT(" %f: Tank is Firing. "), Time);
+	bool IsReloaded = ((FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds);
 
-	if (!Barrel) { return; }
-
-	// Spawn a projectile at the socket location.
-	
-
-	GetWorld()->SpawnActor<AProjectile>
-		(
-			ProjectileBlueprint,
-			Barrel->GetSocketLocation(FName("Projectile")),
-			Barrel->GetSocketRotation(FName("Projectile"))
-		);
+	if (Barrel && IsReloaded)
+	{	
+		// Spawn a projectile at the socket location.
+		auto Projectile = GetWorld()->SpawnActor<AProjectile> // The Variable Projectile can acces members from the class AProjectile.
+			(
+				ProjectileBlueprint,
+				Barrel->GetSocketLocation(FName("Projectile")),
+				Barrel->GetSocketRotation(FName("Projectile"))
+			);
+		Projectile->LaunchProjectile(LaunchSpeed);
+		LastFireTime = FPlatformTime::Seconds();
+	}
 }
 
 
@@ -72,7 +74,7 @@ void ATank::AimAt(FVector OutHitLocation)
 void ATank::SetBarrelReference(UTankBarrel* BarrelToSet)
 {
 	TankAimingComponent->SetBarrelReference(BarrelToSet);
-	Barrel = BarrelToSet;
+	Barrel = BarrelToSet; // Why did we do this? Lecture 154 or 155, i think 155.
 }
 
 

@@ -1,5 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+#include "Runtime/Engine/Classes/GameFramework/ProjectileMovementComponent.h"
 #include "Projectile.h"
 
 
@@ -9,6 +10,9 @@ AProjectile::AProjectile()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	ProjectileMovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>(FName("Projectile Movement"));
+	ProjectileMovementComponent->bAutoActivate = false; 
+	// What this does is: It will NOT just fly off until we Fire the Tank. it doesnt bAutoActivate. When we construct, dont send it flying.
 }
 
 // Called when the game starts or when spawned
@@ -25,3 +29,11 @@ void AProjectile::Tick(float DeltaTime)
 
 }
 
+void AProjectile::LaunchProjectile(float Speed)
+{
+	auto Time = GetWorld()->GetTimeSeconds();
+	UE_LOG(LogTemp, Warning, TEXT(" %f: Projectile is Firing At a Speed of: %f "), Time, Speed);
+	
+	ProjectileMovementComponent->SetVelocityInLocalSpace(FVector::ForwardVector * Speed); // Equals Launch Velocity  UnitVector * Speed = Velocity? 
+	ProjectileMovementComponent->Activate(); // When we Launch Activate so it actually Fires.
+}

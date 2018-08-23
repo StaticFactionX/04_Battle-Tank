@@ -16,6 +16,7 @@ class AProjectile;
 
 
 
+
 UCLASS()
 class BATTLETANK_API ATank : public APawn
 {
@@ -37,13 +38,6 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void Fire();
 
-
-
-
-
-
-
-
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -51,9 +45,6 @@ protected:
 	UTankAimingComponent* TankAimingComponent = nullptr; 
 	// Lecture 137 OR 138  if a refresher is needed,  
 	//I Believe this is an instantiation of my class UTankAimingComponent and im giving it the Variable TankAimingComponent, RESEARCH
-
-
-
 
 private:
 	
@@ -73,5 +64,9 @@ private:
 
 	// Local Barrel Reference for spawning projectile.
 	UTankBarrel* Barrel = nullptr;
+
+	float ReloadTimeInSeconds = 3.0;
+
+	double LastFireTime = 0;
 	
 };
