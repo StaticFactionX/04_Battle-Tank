@@ -15,6 +15,12 @@ ATank::ATank()
 
 }
 
+void ATank::Fire()
+{
+	auto Time = GetWorld()->GetTimeSeconds();
+	UE_LOG(LogTemp, Warning, TEXT(" %f: Tank is Firing. "), Time);
+}
+
 // Called when the game starts or when spawned
 void ATank::BeginPlay()
 {

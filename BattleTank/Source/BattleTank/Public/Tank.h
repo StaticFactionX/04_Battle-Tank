@@ -11,6 +11,7 @@
 //Forward Declarations
 class UTankBarrel;
 class UTankAimingComponent;
+class UTankTurret;
 
 
 
@@ -21,18 +22,24 @@ class BATTLETANK_API ATank : public APawn
 
 public:
 
-	
+
+	UFUNCTION(BlueprintCallable, Category = Setup) // This Creates a reference that BluePrint can call, called 'SetBarrelReference'
+		void SetBarrelReference(UTankBarrel* BarrelToSet); // Declaration
+
+
+	UFUNCTION(BlueprintCallable, Category = Setup)
+		void SetTurretReference(UTankTurret* TurretToSet);
 
 	// Sets default values for this pawn's properties
 	void AimAt(FVector OutHitLocation);
 
+	UFUNCTION(BlueprintCallable)
+	void Fire();
 
 
-	UFUNCTION(BlueprintCallable, Category = Setup) // This Creates a reference that BluePrint can call, called 'SetBarrelReference'
-	void SetBarrelReference(UTankBarrel* BarrelToSet); // Declaration
 
-	UFUNCTION(BlueprintCallable, Category = Setup)
-		void SetTurretReference(UTankTurret* TurretToSet);
+
+
 
 protected:
 	// Called when the game starts or when spawned
@@ -56,7 +63,7 @@ private:
 
 
 	UPROPERTY(EditAnywhere, Category = Firing)
-		float LaunchSpeed = 100000;
+		float LaunchSpeed = 60000;
 
 	
 };

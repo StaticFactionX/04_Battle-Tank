@@ -57,7 +57,7 @@ private:
 	float CrossHairXLocation = 0.5;
 
 	UPROPERTY(EditAnywhere)
-	float CrossHairYLocation = 0.3333;
+	float CrossHairYLocation = 0.333333;
 
 
 

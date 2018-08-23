@@ -32,7 +32,7 @@ public:
 private:
 
 	UPROPERTY(EditAnywhere, Category = Barrel_Setup)
-	float Max_Degrees_Per_Second = 5;  
+	float Max_Degrees_Per_Second = 10;  
 
 
 

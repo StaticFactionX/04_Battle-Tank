@@ -8,6 +8,7 @@
 
 /*
 INHERITANCE HIERARCHY:
+
 'UObjectBase'  <---  'UObjectBaseUtility'  <---  'UObject'  <---  'AActor'  <---  'AController'  <---  'APlayerController'  <---  'ADebugCameraController'.
 
 SIDE NOTE:  "AActor is the last Class with BeginPlay()".
@@ -91,7 +92,7 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector &OutHitLocation) cons
 
 bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector &LookDirection) const /// ! Remember to Add PARAMETERS To DECLARATION. !
 {
-		FVector CameraWorldLocation; // (TO Be DISCARDED  < - - - -  >  "LookDirection" Comes in as a REFERENCE or OUT-PARAM)
+		FVector CameraWorldLocation; // (TO Be DISCARDED  < - - - -  >  "LookDirection" Comes in as a REFERENCE in our OUT-PARAM)
 
 		return DeprojectScreenPositionToWorld
 		(
@@ -115,7 +116,8 @@ bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVec
 		HitResult,
 		StartLocation,
 		EndLocation,
-		ECollisionChannel::ECC_Visibility)
+		ECollisionChannel::ECC_Visibility
+	)
 		)
 	{
 		OutHitLocation = HitResult.Location;
@@ -125,7 +127,6 @@ bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVec
 	OutHitLocation = FVector(0);
 	return false;
 }
-		
 
 /*
 QUESTION 1:

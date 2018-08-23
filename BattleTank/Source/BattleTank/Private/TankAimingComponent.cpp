@@ -1,8 +1,10 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+
+#include "TankAimingComponent.h"
 #include "TankBarrel.h"
 #include "TankTurret.h"
-#include "TankAimingComponent.h"
+
 
 
 
@@ -11,7 +13,7 @@ UTankAimingComponent::UTankAimingComponent()
 {
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
-	PrimaryComponentTick.bCanEverTick = true;
+	PrimaryComponentTick.bCanEverTick = false;
 
 	// ...
 }
@@ -65,18 +67,8 @@ void UTankAimingComponent::AimAt(FVector OutHitLocation, float LaunchSpeed)
 		{
 		auto AimDirection = OutLaunchVelocity.GetSafeNormal(); // GetSafeNormal() turns it into a Unit Vector.
 		MoveBarrelTowards(AimDirection);
-
-		auto Time = GetWorld()->GetTimeSeconds();
-		UE_LOG(LogTemp, Warning, TEXT(" %f: AimSolution Found. "), Time);
-
 		}
-
-			else
-
-			{
-				auto Time = GetWorld()->GetTimeSeconds();
-				UE_LOG(LogTemp, Warning, TEXT(" %f: No AimSolution Found. "), Time);
-			}
+		
 
 }
 
@@ -95,7 +87,11 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 	
 
 	Barrel->ElevateBarrel(DeltaRotator.Pitch); 
-	// SIDE NOTE: The Number in the () is the Relative Speeds Input that gets passed to Relative Speed the Variable and that's how the calculations work.
+	// SIDE NOTE: The Number in the ( ) is the Relative Speeds Input that gets passed to Relative Speed the Variable and that's how the calculations work.
+
+	Turret->RotateBarrel(DeltaRotator.Yaw);
+
+
 }
 
 
