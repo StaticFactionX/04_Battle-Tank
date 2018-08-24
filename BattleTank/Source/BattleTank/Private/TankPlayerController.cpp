@@ -17,14 +17,6 @@ void ATankPlayerController::BeginPlay()
 {
 	// Super::   Makes Sure the BeginPlay()  on the Super:: Class, is being called
 	Super::BeginPlay();
-
-	
-	auto ControlledTank = GetControlledTank();
-
-if (!ControlledTank) { UE_LOG(LogTemp, Warning, TEXT(" PlayerController Not Possessing Tank: %s "), *GetPawn()->GetName()); }
-else { UE_LOG(LogTemp, Warning, TEXT(" PlayerController Is Possessing The Tank: %s "), *GetControlledTank()->GetName()); }
-
-
 };
 
 //TICK

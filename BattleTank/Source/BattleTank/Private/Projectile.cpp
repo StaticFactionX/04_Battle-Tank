@@ -1,7 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "Runtime/Engine/Classes/GameFramework/ProjectileMovementComponent.h"
 #include "Projectile.h"
+#include "Runtime/Engine/Classes/GameFramework/ProjectileMovementComponent.h"
+
 
 
 // Sets default values
@@ -30,10 +31,7 @@ void AProjectile::Tick(float DeltaTime)
 }
 
 void AProjectile::LaunchProjectile(float Speed)
-{
-	auto Time = GetWorld()->GetTimeSeconds();
-	UE_LOG(LogTemp, Warning, TEXT(" %f: Projectile is Firing At a Speed of: %f "), Time, Speed);
-	
+{	
 	ProjectileMovementComponent->SetVelocityInLocalSpace(FVector::ForwardVector * Speed); // Equals Launch Velocity  UnitVector * Speed = Velocity? 
 	ProjectileMovementComponent->Activate(); // When we Launch Activate so it actually Fires.
 }
