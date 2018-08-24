@@ -22,6 +22,7 @@ private:
 	
 	UPROPERTY(EditAnywhere, Category = Barrel_Rotation)
 		float Rotation_Max_Degrees_Per_Second = 25;
+	//I Think I Want this to remain EditAnywhere that way I can make some tanks harder than others for added challenge, (I May need to adjust fire time)
 
 	
 };

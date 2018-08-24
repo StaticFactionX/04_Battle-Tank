@@ -31,15 +31,16 @@ public:
 
 private:
 
-	UPROPERTY(EditAnywhere, Category = Barrel_Setup)
+	UPROPERTY(EditDefaultsOnly, Category = Barrel_Setup)
 	float Max_Degrees_Per_Second = 10;  
 
 
 
-	UPROPERTY(EditAnywhere, Category = Barrel_Setup)
+	UPROPERTY(EditDefaultsOnly, Category = Barrel_Setup)
 		float Max_Elevation = 40;
+	//I Think I Want this to remain EditAnywhere that way I can make some tanks harder than others for added challenge, (I May need to adjust fire time)
 	
-	UPROPERTY(EditAnywhere, Category = Barrel_Setup)
+	UPROPERTY(EditDefaultsOnly, Category = Barrel_Setup)
 		float Min_Elevation = 0;
-
+	//I Think I Want this to remain EditAnywhere that way I can make some tanks harder than others for added challenge, (I May need to adjust fire time)
 };
