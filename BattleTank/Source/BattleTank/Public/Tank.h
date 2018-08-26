@@ -58,6 +58,7 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = Firing)
 		float LaunchSpeed = 60000;
+	// TODO Make the A.I. Temporarily Shoot slower, need to fix the Player Controls not reaching far enough.
 
 	UPROPERTY(EditDefaultsOnly, Category = Firing)
 		float ReloadTimeInSeconds = 3.0;
