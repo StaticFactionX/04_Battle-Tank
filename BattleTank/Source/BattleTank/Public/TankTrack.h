@@ -8,6 +8,7 @@
 #include "TankTrack.generated.h"
 
 
+
 /// Anything in the Multi-Line Comment will show up on the Object in Blue-Print if you HOVER your mouse over it, this is a good way to previde details.
  /*  TankTrack is used to set maximum Driving Force, And to apply forces to the tank.   */
 UCLASS(meta = (BlueprintSpawnableComponent))
@@ -27,4 +28,10 @@ public:
 	UPROPERTY(EditDefaultsOnly)
 	float Max_Track_Driving_Force = 400000; // Assum Tank is 40 Tons, and we have 1G of Acceleration.
 
+	
+	
+
+
 };
+
+//TODO: Quick side note their is NO BEGINPLAY() IS THAT MY PROBLEM?

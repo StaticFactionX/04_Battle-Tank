@@ -10,9 +10,10 @@
 
 //Forward Declarations
 class UTankBarrel;
-class UTankAimingComponent;
 class UTankTurret;
 class AProjectile;
+class UTankAimingComponent;
+class UTankMovementComponent;
 
 
 
@@ -24,13 +25,12 @@ class BATTLETANK_API ATank : public APawn
 
 public:
 
-
-	UFUNCTION(BlueprintCallable, Category = Setup) // This Creates a reference that BluePrint can call, called 'SetBarrelReference'
-		void SetBarrelReference(UTankBarrel* BarrelToSet); // Declaration
-
+	// This Creates a reference that BluePrint can call, called 'SetBarrelReference'
+	UFUNCTION(BlueprintCallable, Category = Setup) 
+	void SetBarrelReference(UTankBarrel* BarrelToSet); // Declaration
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
-		void SetTurretReference(UTankTurret* TurretToSet);
+	void SetTurretReference(UTankTurret* TurretToSet);
 
 	// Sets default values for this pawn's properties
 	void AimAt(FVector OutHitLocation);
@@ -38,27 +38,36 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void Fire();
 
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
 
-	UTankAimingComponent* TankAimingComponent = nullptr; 
+
+protected:
 	// Lecture 137 OR 138  if a refresher is needed,  
 	//I Believe this is an instantiation of my class UTankAimingComponent and im giving it the Variable TankAimingComponent, RESEARCH
+
+	UTankAimingComponent* TankAimingComponent = nullptr;
+
+	UPROPERTY(BlueprintReadOnly)
+	UTankMovementComponent* TankMovementComponent = nullptr; //TODO potentially Remove/Add This Nullptr
+	
+	// TODO, figure out (nullptr in Great detail) ---> Is this just Somewhere to store the Pointer?
+
+
+
 
 private:
 	
 	ATank(); // Constructor
 
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
+
+
 	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
-	
-
+	// virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	UPROPERTY(EditAnywhere, Category = Firing)
 		float LaunchSpeed = 60000;
-	// TODO Make the A.I. Temporarily Shoot slower, need to fix the Player Controls not reaching far enough.
+	//TODO: Fix Tank Aiming Distance, WITHOUT changing how fast the Prjoectile Shoots, I Believe their is an Equation around here somewhere.
 
 	UPROPERTY(EditDefaultsOnly, Category = Firing)
 		float ReloadTimeInSeconds = 3.0;

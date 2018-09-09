@@ -4,6 +4,7 @@
 #include "Projectile.h"
 #include "TankBarrel.h"
 #include "TankTurret.h"
+#include "TankMovementComponent.h"
 #include "TankAimingComponent.h"
 
 
@@ -16,10 +17,8 @@ ATank::ATank()
 	PrimaryActorTick.bCanEverTick = false;
 
 	//No Need to protect Pointers as added at construction, 
-	TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("AimingComponent"));
-
-	
-
+	TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("Aiming Component"));
+	TankMovementComponent = CreateDefaultSubobject<UTankMovementComponent>(FName("Movement Component"));	
 }
 
 
@@ -53,14 +52,14 @@ void ATank::BeginPlay()
 }
 
 
-
+/*
 // Called to bind functionality to input
 void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
 }
-
+*/
 
 
 void ATank::AimAt(FVector OutHitLocation) 
@@ -83,3 +82,17 @@ void ATank::SetTurretReference(UTankTurret* TurretToSet)
 {
 	TankAimingComponent->SetTurretReference(TurretToSet);
 }
+
+
+
+
+/*
+
+	ATank* ATankAIController::GetControlledTank()
+		{
+		return (Cast<ATank>(GetPawn()));
+		}
+
+	// EXPLENATION:   "Returns Control of an Instance, it has access to the original classes methods ".
+
+*/
